@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ShowMember: View {
     
-    @State var name : String = ""
-    @State var lastname : String = ""
-    @State var email : String = ""
-    @State var phone : String = ""
-    @State var address : String = ""
+    @State var name : String = "Mariam"
+    @State var lastname : String = "Ahmed"
+    @State var email : String = "Mariam11@hotmail.com"
+    @State var phone : String = "+699 53 813 1432"
+    @State var address : String = "ksa, Riyadh"
     
     
     var body: some View {
@@ -25,7 +25,7 @@ struct ShowMember: View {
                         Image(systemName: "person.circle")
                             .font(.system(size: 90))
                             .symbolRenderingMode(.palette)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color("gray1"))
                             .fontWeight(.thin)
                     }.padding(.bottom)
                     
@@ -33,7 +33,7 @@ struct ShowMember: View {
                             .font(.title3)
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity,alignment: .leading)
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(Color("gray1"))
                         Text("\(name)")
                             .font(.body)
                             .fontWeight(.medium)
@@ -46,7 +46,7 @@ struct ShowMember: View {
                             .font(.title3)
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity,alignment: .leading)
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(Color("gray1"))
                         Text("\(lastname)")
                             .font(.body)
                             .fontWeight(.medium)
@@ -60,7 +60,7 @@ struct ShowMember: View {
                             .font(.title3)
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity,alignment: .leading)
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(Color("gray1"))
                         Text("\(email)")
                             .font(.body)
                             .fontWeight(.medium)
@@ -74,7 +74,7 @@ struct ShowMember: View {
                             .font(.title3)
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity,alignment: .leading)
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(Color("gray1"))
                         Text("\(phone)")
                             .font(.body)
                             .fontWeight(.medium)
@@ -88,7 +88,7 @@ struct ShowMember: View {
                             .font(.title3)
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity,alignment: .leading)
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(Color("gray1"))
                         Text("\(address)")
                             .font(.body)
                             .fontWeight(.medium)
@@ -98,13 +98,13 @@ struct ShowMember: View {
                     }.padding(.bottom)
                     
                     Group{
-                        Image("qr")
-//                            .font(.system(size: 90))
-//                            .symbolRenderingMode(.palette)
-//                            .foregroundStyle(.secondary)
-//                            .fontWeight(.thin)
+                        Image("new")
+                        //                            .font(.system(size: 90))
+                        //                            .symbolRenderingMode(.palette)
+                        //                            .foregroundStyle(.secondary)
+                        //                            .fontWeight(.thin)
                             .resizable()
-                            .frame(width: 100, height: 100)
+                            .frame(width: 140, height: 140)
                     }.padding(.bottom)
                     
                 }

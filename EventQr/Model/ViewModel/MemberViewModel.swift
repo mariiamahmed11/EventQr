@@ -43,6 +43,10 @@ class MemberViewModel : ObservableObject {
         
     }
     
+    
+    
+    
+    
 //    func geteventmember() {
 //        db.collection("Event").addSnapshotListener { (querySnapshot, error) in
 //            guard let documents = querySnapshot?.documents else {

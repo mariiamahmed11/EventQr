@@ -20,24 +20,14 @@ struct SignUpPage: View {
 //            TabViews()
 //        } else {
             ZStack{
-                let gradient = Gradient(colors: [. black, .gray])
-                Rectangle()
-                    .fill(
-                        LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .topTrailing)
-                    )
-                
-                    .ignoresSafeArea()
-                //            Text("Create Accont")
-                //                .bold()
-                //                .foregroundColor(.accentColor)
-                //                .font(.title)
-                //                .padding(.bottom)
                 ScrollView {
                     VStack{
                         ExtractedView()
                         
                     }
+                    //.padding()
                 }.padding(.top)
+                
                 
             }
       //  }
@@ -65,6 +55,12 @@ struct ExtractedView: View {
     var body: some View {
             
             VStack{
+                Text("Create Accont")
+                              .bold()
+                              .foregroundColor(.accentColor)
+                              .font(.title2)
+                              .padding(.bottom)
+                              .padding(.bottom)
                 Group {
                     Text("Email *")
                         .padding(.trailing , 280)
@@ -73,11 +69,11 @@ struct ExtractedView: View {
                         .font(.title3)
                     TextField("", text: $email)
                         .keyboardType(.emailAddress)
-                        .foregroundColor(.white)
+                        .foregroundColor(.gray)
                         .padding()
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(.green, lineWidth: 0.8)
+                                .stroke(.gray, lineWidth: 1)
                         )
                         .padding(.bottom)
                         .padding()
@@ -87,11 +83,11 @@ struct ExtractedView: View {
                         .bold()
                         .font(.title3)
                     TextField("", text: $fristName)
-                        .foregroundColor(.white)
+                        .foregroundColor(.gray)
                         .padding()
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(.green, lineWidth: 0.8)
+                                .stroke(.gray, lineWidth: 1)
                         )
                         .padding(.bottom)
                         .padding()
@@ -102,11 +98,11 @@ struct ExtractedView: View {
                     .bold()
                     .font(.title3)
                 TextField("", text: $LastName)
-                    .foregroundColor(.white)
+                    .foregroundColor(.gray)
                     .padding()
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(.green, lineWidth: 0.8)
+                            .stroke(.gray, lineWidth: 1)
                     )
                     .padding(.bottom)
                     .padding()
@@ -116,12 +112,12 @@ struct ExtractedView: View {
                     .bold()
                     .font(.title3)
                 TextField("", text: $phone)
-                    .foregroundColor(.white)
+                    .foregroundColor(.gray)
                     .keyboardType(.phonePad)
                     .padding()
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(.green, lineWidth: 0.8)
+                            .stroke(.gray, lineWidth: 1)
                     )
                     .padding(.bottom, 10)
                     .padding()
@@ -131,12 +127,12 @@ struct ExtractedView: View {
                     .bold()
                     .font(.title3)
                 TextField("", text: $address)
-                    .foregroundColor(.white)
+                    .foregroundColor(.gray)
                     //.keyboardType(.)
                     .padding()
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(.green, lineWidth: 0.8)
+                            .stroke(.gray, lineWidth: 1)
                     )
                     .padding(.bottom)
                     .padding()
@@ -147,19 +143,19 @@ struct ExtractedView: View {
                         .bold()
                         .font(.title3)
                     SecureField("", text: $password)
-                        .foregroundColor(.white)
+                        .foregroundColor(.gray)
                         .padding()
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(.green, lineWidth: 0.8)
+                                .stroke(.gray, lineWidth: 1)
                         )
                         .padding(.bottom)
                         .padding()
                 }
                 Button(action: {
-                    signUp()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.10) {
-                        vm.addAdmin(AdminName: fristName, AdminLastname: LastName, AdminEmail: email, AdminPhone: phone, AdminAddress: address)}
+                    signUp(completion: {
+                        vm.addAdmin(AdminName: fristName, AdminLastname: LastName, AdminEmail: email, AdminPhone: phone, AdminAddress: address)
+                    })
                 }) {
                     Text("Register ")
                         .bold()
@@ -174,14 +170,21 @@ struct ExtractedView: View {
         
     }
     
-    func signUp(){
+    func signUp(completion: @escaping () -> Void){
+        try? Auth.auth().signOut()
+            
+        
         Auth.auth().createUser(withEmail: email, password: password){ re , errors in
-            if errors != nil{
+            print("gggg")
+            
+            if errors != nil {
                 print(errors!.localizedDescription )
+                print("no errror in signup")
+                
             } else {
                 print(re!.description)
-                signUp()
                 //showingAlert = true
+                completion()
             }
         }
     }

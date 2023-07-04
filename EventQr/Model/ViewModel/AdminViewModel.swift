@@ -14,10 +14,11 @@ import FirebaseAuth
 
 @MainActor class AdminViewModel : ObservableObject {
     
-    
     var db = Firestore.firestore()
     
     @Published var Events = [Event]()
+    
+    @Published var AllMemebers = [EventMember]()
     
     let storage = Storage.storage()
     
@@ -29,8 +30,6 @@ import FirebaseAuth
 //
     init() {
         getAdminEvents()
-        //getAdmininfo()
-            
     }
 
     func uploadEventimage (){
@@ -55,9 +54,10 @@ import FirebaseAuth
                     let StartDate = data["StartDate"] as? Date ?? Date.now
                     let EndDate = data["EndDate"] as? Date ?? Date.now
                     let EventID = data["EventID"] as? String ?? ""
+                    let EventMember = data["EventMember"] as? [String] ?? []
                     
                     //self.Events.append(names)
-                    return Event(EventName: EventName, EventLocation: EventLocation, EventID:EventID, StartDate: StartDate, EndDate: EndDate, EventMembers: [])
+                    return Event(EventName: EventName, EventLocation: EventLocation, EventID:EventID, StartDate: StartDate, EndDate: EndDate, EventMember: EventMember)
                     //insert them in my strcut so i can deal with them
                 }
             }
@@ -65,8 +65,9 @@ import FirebaseAuth
     }
     
     
-    func addevent(EventName: String, EventLocation: String, StartDate:Date, EndDate: Date){
+    func addevent(EventName: String, EventLocation: String, StartDate:Date, EndDate: Date,image:UIImage){
         let eventId = UUID().uuidString
+        let userId = Auth.auth().currentUser?.uid
         
         db.collection("Event").document(eventId)
         
@@ -84,11 +85,29 @@ import FirebaseAuth
             if let error = error {
                 print(error.localizedDescription)
             }
+            print("gg done")
+            if let imageData = image.jpegData(compressionQuality: 1){
+                let storage = Storage.storage()
+                storage.reference().child("\(eventId)").putData(imageData, metadata:nil){
+                    
+                    (_, err) in
+                    if let err = err {
+                        
+                        print ("an error has occured -\(err.localizedDescription)")
+                    } else {
+                        print("image uploaded successfully")
+                    }
+                }
+                
+            } else {
+                print ("could not unwarp/case image to data")
+            }
+            
         }
     }
     
     func addAdmin(AdminName: String, AdminLastname: String, AdminEmail:String, AdminPhone: String, AdminAddress: String){
-        
+        let userId = Auth.auth().currentUser!.uid
         db.collection("AdminInfo").document()
         
             .setData([
@@ -96,7 +115,7 @@ import FirebaseAuth
                 "AdminLastname": AdminLastname,
                 "AdminEmail": AdminEmail,
                 "AdminPhone": AdminPhone,
-                "AdminId": userId as Any,
+                "AdminId": userId,
                 "AdminAddress" : AdminAddress,
             ])
         {
@@ -104,6 +123,7 @@ import FirebaseAuth
             if let error = error {
                 print(error.localizedDescription)
             }
+            print("done done")
         }
     }
     
@@ -174,11 +194,12 @@ import FirebaseAuth
     //fetch and read from database bring data from data base to my object
     
     func getAdmininfo(complettion: @escaping (AdminInfo) -> Void) {
+        //print("userId \(String(describing: userId))")
        
         db.collection("AdminInfo")
             .whereField("AdminId", isEqualTo: userId ?? "")
             .addSnapshotListener { (querySnapshot, error) in
-                guard let documents = querySnapshot?.documents else {
+                guard let documents = querySnapshot?.documents, !documents.isEmpty else {
                     print("No documents")
                     return
                 }
@@ -191,7 +212,7 @@ import FirebaseAuth
                     let address = data["AdminAddress"] as! String
                     let email = data["AdminEmail"] as! String
                     
-                    print ("hj\(email)")
+                    //print ("hj\(email)")
                     
                     let adminInfo =  AdminInfo(AdminName: fristname , AdminLastname: lastname, AdminEmail: email, AdminPhone: phone, AdminAddress: address)
 //                    return adminInfo
@@ -205,6 +226,24 @@ import FirebaseAuth
     //func to show image in admin home
     //func to generate qr that take useremail, username , userlastname , eventid
     
-    
+    func getallmember() {
+        db.collection("Eventmember").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            self.AllMemebers  = documents.map { (queryDocumentSnapshot) -> EventMember in
+                let data = queryDocumentSnapshot.data()
+                let UserName = data["Mname"] as? String ?? ""
+                let UserLastname = data["Mlastname"] as? String ?? ""
+                let UserEmail = data["Memail"] as? String ?? ""
+                let UserPhone = data["Mphone"] as? String ?? ""
+                // self.classesname.append(names)
+                return EventMember(MemberPhone: UserPhone, MemberFristName: UserName, MemberLastName: UserLastname, MemberEmail: UserEmail)
+            }
+        }
+        
+    }
 }
 

@@ -39,12 +39,13 @@ struct Viewqr : View {
     var body : some View{
         VStack{
             //Text("..")
-            GenerateQr(url: """
-member name : Mariam ALsuwailem ✅
-eventID:052E3622-276B-4F24-ACA8-510891B45D73
-Event start date : 23 jun 2023
-Event End date : 24 jun 2023
-""")
+            GenerateQr(url:"""
+            Name : Mariam Alsuwailem
+            Event : Swift Demo
+            Strat Date: 22 / 7 / 2023
+            End Date : 23 / 7 / 2030
+            
+            """)
             
         }
     }

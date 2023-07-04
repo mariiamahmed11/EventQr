@@ -38,7 +38,7 @@ struct Event : Identifiable, Codable {
     
     var EndDate: Date
     
-    var EventMembers : [EventMember]
+    var EventMember : [String]
     
 }
 
@@ -46,13 +46,13 @@ struct EventMember : Identifiable, Codable {
     
     var id = UUID()
     
-    var eventid : String
+    var MemberPhone : String
     
     var MemberFristName : String
     
     var MemberLastName : String
 
-    var UserQr: String
+    var MemberEmail: String
 
 }
 

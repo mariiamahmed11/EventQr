@@ -22,7 +22,9 @@ struct ChooseCreateMember: View {
                     .font(.title3)
                     .fontWeight(.medium)
                     .frame(maxWidth:.infinity,alignment:.leading)
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(Color("gray1"))
+                Divider()
+                    .padding(.bottom)
                 
                 TextField("Search", text:$SearchContacts)
                     .font(.body)
@@ -44,7 +46,8 @@ struct ChooseCreateMember: View {
                             Text("\(user.UserEmail)")
                             
                             RoundedRectangle(cornerRadius: 30)
-                                .fill(Color.accentColor)
+                                .fill(Color("gray1"))
+                            //.foregroundColor(Color("gray1"))
                                 .frame(width:150, height: 30)
                                 .overlay {
                                     HStack{
@@ -65,22 +68,23 @@ struct ChooseCreateMember: View {
                     }.background(Color.white)
                 }.scrollContentBackground(.hidden)
                 
-                Text("Add New Event Members")
-                    .font(.title3)
-                    .fontWeight(.medium)
-                    .frame(maxWidth:.infinity,alignment:.leading)
-                    .foregroundColor(.accentColor)
-                
-                NavigationLink(destination: AddMember()){
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.gray).opacity(0.09)
-                        .frame(width:50, height: 50)
-                        .overlay{
-                            Text("+")
-                                .font(.title)
-                                .foregroundColor(.accentColor)
-                        }.frame(alignment: .leading)
+                HStack{   Text("Add New Event Members")
+                        .font(.body)
+                        .fontWeight(.medium)
+                    //.frame(maxWidth:.infinity,alignment:.leading)
+                        .foregroundColor(Color("gray1"))
                     
+                    NavigationLink(destination: AddMember()){
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.gray).opacity(0.09)
+                            .frame(width:50, height: 50)
+                            .overlay{
+                                Text("+")
+                                    .font(.title)
+                                    .foregroundColor(Color("gray1"))
+                            }.frame(alignment: .leading)
+                        
+                    }
                 }
                 
                 
@@ -89,8 +93,8 @@ struct ChooseCreateMember: View {
     }
 }
 
-//struct ChooseCreateMember_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChooseCreateMember(eventid: <#Binding<String>#>)
-//    }
-//}
+struct ChooseCreateMember_Previews: PreviewProvider {
+    static var previews: some View {
+        ChooseCreateMember(eventid: "")
+    }
+}

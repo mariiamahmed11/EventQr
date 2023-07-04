@@ -29,6 +29,7 @@
 		CE57A5CF2A3E2C70002C9250 /* imagePicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE57A5CC2A3E2C6F002C9250 /* imagePicker.xcdatamodeld */; };
 		CE57A5D32A3E6B4E002C9250 /* SignUpPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57A5D22A3E6B4E002C9250 /* SignUpPage.swift */; };
 		CE57A5D52A3EE9E3002C9250 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57A5D42A3EE9E2002C9250 /* UserViewModel.swift */; };
+		CEE5AAEE2A439EDC0040FB85 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = CEE5AAED2A439EDC0040FB85 /* SPAlert */; };
 		CEF0EC7E2A40616B009AE466 /* ChooseCreateMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0EC7D2A40616B009AE466 /* ChooseCreateMember.swift */; };
 		CEF0EC802A4063DA009AE466 /* MemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0EC7F2A4063DA009AE466 /* MemberViewModel.swift */; };
 		CEF7239D2A4179DA00C1D637 /* ShowMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7239C2A4179DA00C1D637 /* ShowMember.swift */; };
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE5AAEE2A439EDC0040FB85 /* SPAlert in Frameworks */,
 				CE4D01222A3982E400D5BD70 /* FirebaseAuth in Frameworks */,
 				CE57A5C82A3D0DDF002C9250 /* FirebaseFirestore in Frameworks */,
 				EACC47FC2A41AAC4007BD560 /* FirebaseDatabase in Frameworks */,
@@ -104,10 +106,10 @@
 			children = (
 				EACC47FF2A421522007BD560 /* Info.plist */,
 				CE4D00EE2A38813100D5BD70 /* Model */,
-				CE4D00F62A38848600D5BD70 /* ViewModel */,
 				CE4D00F32A38831000D5BD70 /* AdminView */,
 				CE4D00DF2A38810400D5BD70 /* EventQrApp.swift */,
 				CE4D00E12A38810400D5BD70 /* ContentView.swift */,
+				CE57A5BC2A3AC73A002C9250 /* ScanQr.swift */,
 				CE57A5CB2A3E2C6F002C9250 /* ImagePicker.swift */,
 				CE57A5CC2A3E2C6F002C9250 /* imagePicker.xcdatamodeld */,
 				CE4D00E32A38810A00D5BD70 /* Assets.xcassets */,
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4D00EF2A38817A00D5BD70 /* Model.swift */,
+				CE4D00F62A38848600D5BD70 /* ViewModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,7 +143,6 @@
 				CE4D00F12A38830900D5BD70 /* SignInView.swift */,
 				CE57A5BA2A3AC677002C9250 /* TabViews.swift */,
 				CE57A5B62A3ABC5B002C9250 /* AdminHome.swift */,
-				CE57A5BC2A3AC73A002C9250 /* ScanQr.swift */,
 				CE57A5BE2A3AC77B002C9250 /* AdminProfile.swift */,
 				CE57A5C02A3ADC2A002C9250 /* AddEvent.swift */,
 				CE57A5C22A3B243E002C9250 /* ShowEvent.swift */,
@@ -192,6 +194,7 @@
 				CE57A5C92A3DCD6F002C9250 /* FirebaseStorage */,
 				EACC47FB2A41AAC4007BD560 /* FirebaseDatabase */,
 				EACC48012A4215CE007BD560 /* CodeScanner */,
+				CEE5AAED2A439EDC0040FB85 /* SPAlert */,
 			);
 			productName = EventQr;
 			productReference = CE4D00DC2A38810400D5BD70 /* EventQr.app */;
@@ -224,6 +227,7 @@
 			packageReferences = (
 				CE4D01202A3982E300D5BD70 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EACC48002A4215CE007BD560 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				CEE5AAEC2A439EDB0040FB85 /* XCRemoteSwiftPackageReference "SPAlert" */,
 			);
 			productRefGroup = CE4D00DD2A38810400D5BD70 /* Products */;
 			projectDirPath = "";
@@ -499,6 +503,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		CEE5AAEC2A439EDB0040FB85 /* XCRemoteSwiftPackageReference "SPAlert" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPAlert.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		EACC48002A4215CE007BD560 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
@@ -524,6 +536,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE4D01202A3982E300D5BD70 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		CEE5AAED2A439EDC0040FB85 /* SPAlert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEE5AAEC2A439EDB0040FB85 /* XCRemoteSwiftPackageReference "SPAlert" */;
+			productName = SPAlert;
 		};
 		EACC47FB2A41AAC4007BD560 /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;

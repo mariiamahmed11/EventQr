@@ -13,8 +13,8 @@ import FirebaseAuth
 struct SignInView: View {
     
     @State private var showingSheet = false
-    @State var AdminEmail: String = ""
-    @State private var password: String = ""
+    @State var AdminEmail: String = "mariam.alsuwailem@hotmail.com"
+    @State private var password: String = "123456"
     @State var showingAlert = false
     
     
@@ -26,14 +26,11 @@ struct SignInView: View {
             NavigationView {
                 
                 ZStack{
-                    
-//                                Image("img1")
-//                                    .opacity(0.50)
-                    
-                    let gradient = Gradient(colors: [. black, .gray])
+                            
+                    let gradient = Gradient(colors: [Color.accentColor,Color("gray3")])
                     Rectangle()
                         .fill(
-                            LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .topTrailing)
+                            LinearGradient(gradient: gradient, startPoint: .bottom, endPoint: .top)
                         )
                         .ignoresSafeArea()
                     //.opacity(0.80)
@@ -46,13 +43,13 @@ struct SignInView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width:100)
-                            .foregroundColor(Color.accentColor)
+                            .foregroundColor(Color.white)
                             .padding(.bottom,20)
                         Text("Sign in")
                             .font(.largeTitle)
                             .bold()
                             .padding(.bottom,50)
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(.white)
                         
                         TextField("Email", text: $AdminEmail)
                             .font(.body)
@@ -61,8 +58,8 @@ struct SignInView: View {
                             .padding(10)
                             .overlay( Divider()
                                 .frame(maxWidth: .infinity, maxHeight:1)
-                                .background(Color.accentColor), alignment: .bottom)
-                            .foregroundColor(.white)
+                                .background(Color.white), alignment: .bottom)
+                            .foregroundColor(.black)
                         
                         SecureField("Password", text: $password)
                             .font(.body)
@@ -71,8 +68,8 @@ struct SignInView: View {
                             .padding(10)
                             .overlay( Divider()
                                 .frame(maxWidth: .infinity, maxHeight:1)
-                                .background(Color.accentColor), alignment: .bottom)
-                            .foregroundColor(.white)
+                                .background(Color.white), alignment: .bottom)
+                            .foregroundColor(.black)
                         
                         Button( action: {
                             signIn()
@@ -82,7 +79,7 @@ struct SignInView: View {
                                 .bold()
                                 .frame(width: 140, height: 40)
                                 .foregroundColor(.black)
-                                .background(Color.accentColor)
+                                .background(Color.white)
                                 .cornerRadius(10)
                                 .padding()
                             
@@ -92,7 +89,7 @@ struct SignInView: View {
                         Button("did not have an account ?"){
                             showingSheet.toggle()
                         }
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(.white)
                         .padding(.top,50)
                         
                     }

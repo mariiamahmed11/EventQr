@@ -8,6 +8,7 @@
 import SwiftUI
 import CodeScanner
 import Foundation
+import SPAlert
 
 //Image(systemName: "qrcode.viewfinder")
 //    .resizable()
@@ -24,7 +25,8 @@ import Foundation
 struct Scan: View {
     
     @State var isPresentingScanner = false
-    @State var scannedCode: String = "Scan a QR code to get started."
+    @State var showAlert2 = false
+    @State var scannedCode: String = "Scan member QR code to check premssion."
     
     var scanneSheet : some View {
         CodeScannerView(
@@ -33,6 +35,7 @@ struct Scan: View {
                 if case let .success(code) = result {
                     self.scannedCode = code.string
                     self.isPresentingScanner = false
+                    showAlert2.toggle()
                 }
                 
             }
@@ -41,37 +44,62 @@ struct Scan: View {
     
     var body: some View {
         ZStack{
-            let gradient = Gradient(colors: [. black, .gray])
-            Rectangle()
-                .fill(
-                    LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .topTrailing)
-                )
-                .ignoresSafeArea()
+                let gradient = Gradient(colors: [Color.accentColor,Color("gray3")])
+                Rectangle()
+                    .fill(
+                        LinearGradient(gradient: gradient, startPoint: .bottom, endPoint: .top)
+                    )
+                    .ignoresSafeArea()
             
             VStack(spacing: 10) {
-               Image(systemName: "doc.viewfinder.fill")
+                Image(systemName: "doc.viewfinder.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(width:100)
-                    .foregroundColor(Color.accentColor)
+                    .foregroundColor(.white)
                     .padding()
                     .padding()
                 Text(scannedCode)
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(.white)
                 
                 Button("Scan OR Code"){
                     self.isPresentingScanner = true
                 }.bold()
                     .frame(width: 140, height: 40)
                     .foregroundColor(.black)
-                    .background(Color.accentColor)
+                    .background(Color.white)
                     .cornerRadius(10)
                     .padding()
                     .sheet(isPresented: $isPresentingScanner){
                         self.scanneSheet
                     }
+                    .SPAlert(
+                        isPresent: $showAlert2,
+                        title: "Authorized member",
+                        message: "check the member info",
+                        duration: 3.0 ,
+                        dismissOnTap: false,
+                        preset: .done,
+                        haptic:.success,
+                        layout: .init(),
+                        completion: {
+                            print ("This alert has been completed!")
+                        }
+                    )
+                
             }
+            
         }
+    }
+        
+    func dd(){
+        if scannedCode.contains("052E3622-276B-4F24-ACA8-510891B45D73"){
+            showAlert2.toggle()
+        } else {
+            print("no match")
+            //Text(scannedCode)
+        }
+
     }
 }
 
@@ -80,3 +108,4 @@ struct Scan_Previews: PreviewProvider {
         Scan()
     }
 }
+
