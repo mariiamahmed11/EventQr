@@ -4,12 +4,12 @@
 that Restricted to certain people to allow them to enter 🗓️.</h3>
 
 this app allows you to : 
-<p> 1- creae new account , or sign in and view profile and edit it.</p>
+<p> 1- create new account , or sign in and view profile and edit it.</p>
 <p> 2- create event with all its detailes.</p>
 <p> 3- create new member or choose exciting member to add them to this event.</p>
 <p> 4- by adding member to event an email masseage with Qr code and member information will send to this member.</p>
 <p> 5- the admin can view all events they created and view each event detailes and events' members "with thier info and qr" attached to it.</p>
-<p> 6- the adimn can scan the qr received by the member to verify memeber access authorization to this event.</p>
+<p> 6- the admin can scan the qr received by the member to verify memeber access authorization to this event.</p>
 
 <h1>here is all the app Initial interfaces📱 </h1>
 <h3>stay close as EventQr be in app store soon ✨ ! </h1>
